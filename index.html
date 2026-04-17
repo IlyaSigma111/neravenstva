@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Неравенства и системы | 8 класс | Теория + викторина</title>
+    <title>Неравенства и системы | Термины и обозначения | 8 класс</title>
     <style>
         * {
             margin: 0;
@@ -12,360 +12,598 @@
         }
 
         body {
-            font-family: system-ui, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            font-family: system-ui, 'Segoe UI', 'Inter', sans-serif;
             background: linear-gradient(145deg, #1a2a3a 0%, #0e1a2a 100%);
             color: rgba(255, 255, 255, 0.95);
-            line-height: 1.5;
+            min-height: 100vh;
             padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .container {
-            max-width: 1100px;
+        .quiz-wrapper {
+            max-width: 950px;
+            width: 100%;
             margin: 0 auto;
         }
 
-        /* карточки */
-        .glass-card {
-            background: rgba(20, 25, 35, 0.4);
-            backdrop-filter: blur(12px);
+        .quiz-card {
+            background: rgba(20, 25, 35, 0.35);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 2rem;
-            padding: 1.8rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
         }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #b0c4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 1rem 0 1rem 0;
-            border-left: 4px solid #ffaa44;
-            padding-left: 1rem;
-            color: #ffdd99;
-        }
-
-        h3 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin: 1rem 0 0.5rem 0;
-            color: #ffdd99;
-        }
-
-        .term-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        .quiz-header {
+            background: linear-gradient(135deg, #2c4f6e, #1a3a50);
+            padding: 1.2rem 2rem;
+            color: #fef0cf;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
             gap: 1rem;
-            margin: 1rem 0;
+            border-bottom: 3px solid #ffaa44;
         }
 
-        .term-item {
+        .title h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.2px;
+        }
+
+        .title p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 0.2rem;
+        }
+
+        .score-box {
+            background: #ffaa44;
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            color: #1a2a3a;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .quiz-body {
+            padding: 2rem 2rem 1.8rem;
+            min-height: 420px;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff2e0;
+            line-height: 1.4;
+            margin-bottom: 1.8rem;
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 1.2rem;
-            padding: 0.8rem 1rem;
-            border-left: 3px solid #ffaa44;
+            padding: 1rem 1.3rem;
+            border-radius: 1.5rem;
+            border-left: 6px solid #ffaa44;
         }
 
-        .term-item strong {
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.2rem;
+            gap: 1rem;
+        }
+
+        .option.selectable:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 170, 68, 0.4);
+            transform: translateX(5px);
+        }
+
+        .option-letter {
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.05);
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            font-size: 1.2rem;
             color: #ffaa88;
         }
 
-        .example {
+        .option-text {
+            font-size: 1rem;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .paper-mode .option {
+            cursor: default;
+        }
+        .paper-mode .option:hover {
+            transform: none;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .option.correct-highlight {
+            background: rgba(74, 222, 128, 0.15);
+            border-color: #4ade80;
+        }
+        .option.wrong-highlight {
+            background: rgba(255, 107, 107, 0.15);
+            border-color: #ff6b6b;
+        }
+        .option.selected-highlight {
+            background: rgba(255, 170, 68, 0.15);
+            border-color: #ffaa44;
+        }
+        .disabled-option {
+            pointer-events: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.7rem 1.8rem;
+            border-radius: 2.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.96);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-next {
+            background: rgba(255, 170, 68, 0.2);
+            border-color: #ffaa44;
+            color: #ffdd99;
+        }
+        .btn-restart {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .progress-info {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            text-align: center;
+            opacity: 0.6;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.4rem;
+            border-radius: 30px;
+        }
+
+        .mode-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            gap: 2rem;
+        }
+        .mode-buttons {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .mode-btn {
+            background: #2c4f6e;
+            padding: 1rem 2rem;
+            font-size: 1.3rem;
+            min-width: 200px;
+        }
+        .mode-btn.paper {
+            background: #4a6741;
+        }
+        .mode-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .mode-desc {
+            opacity: 0.7;
+        }
+
+        .final-list {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 1.2rem;
             padding: 1rem;
-            margin: 0.8rem 0;
-            font-family: monospace;
-            font-size: 1rem;
+            margin-top: 1rem;
+            max-height: 460px;
+            overflow-y: auto;
         }
-
-        .quiz-section {
+        .final-item {
+            padding: 0.7rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .feedback-message {
+            padding: 1rem;
+            border-radius: 1.2rem;
+            text-align: center;
+            font-weight: 600;
             margin-top: 1rem;
         }
 
-        .quiz-question {
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: 1.2rem;
-            padding: 1.2rem;
-            margin-bottom: 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .quiz-question p {
-            font-weight: 500;
-            margin-bottom: 0.8rem;
-        }
-
-        .options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin: 0.8rem 0;
-        }
-
-        .option-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 2rem;
-            padding: 0.4rem 1.2rem;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .option-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: scale(0.97);
-        }
-
-        .feedback {
-            margin-top: 0.6rem;
-            font-size: 0.9rem;
-            padding: 0.5rem;
-            border-radius: 1rem;
-        }
-
-        .correct-feedback {
-            color: #a3e0a3;
-            background: rgba(74, 222, 128, 0.1);
-            border-left: 3px solid #4ade80;
-        }
-
-        .wrong-feedback {
-            color: #ffaaaa;
-            background: rgba(255, 107, 107, 0.1);
-            border-left: 3px solid #ff6b6b;
-        }
-
-        .hint-btn {
-            background: rgba(255, 170, 68, 0.15);
-            border: 1px solid #ffaa44;
-            border-radius: 2rem;
-            padding: 0.3rem 1rem;
-            font-size: 0.8rem;
-            cursor: pointer;
-            margin-top: 0.5rem;
-            transition: 0.2s;
-        }
-
-        .hint-btn:hover {
-            background: rgba(255, 170, 68, 0.3);
-        }
-
-        .hint-text {
-            margin-top: 0.5rem;
-            padding: 0.6rem;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 1rem;
-            font-size: 0.9rem;
-            font-family: monospace;
-            display: none;
-        }
-
-        .hint-text.show {
-            display: block;
-        }
-
-        hr {
-            margin: 1.5rem 0;
-            border-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .badge {
-            display: inline-block;
-            background: #ffaa44;
-            color: #1a2a3a;
-            font-weight: bold;
-            padding: 0.2rem 0.8rem;
-            border-radius: 2rem;
-            font-size: 0.7rem;
-            margin-right: 0.6rem;
-        }
-
-        @media (max-width: 650px) {
-            .glass-card {
-                padding: 1.2rem;
-            }
-            h1 {
-                font-size: 1.5rem;
-            }
+        @media (max-width: 620px) {
+            .question-text { font-size: 1.2rem; }
+            .quiz-body { padding: 1.2rem; }
+            .option { padding: 0.7rem 1rem; }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- ЗАГОЛОВОК -->
-    <div class="glass-card">
-        <h1>📐 Неравенства с одной переменной</h1>
-        <p>8 класс · Системы неравенств · Обозначения · Решение</p>
-    </div>
-
-    <!-- ========== ЧАСТЬ 1: ТЕОРИЯ (ТЕРМИНЫ, ОБОЗНАЧЕНИЯ) ========== -->
-    <div class="glass-card">
-        <h2>📖 Термины и обозначения</h2>
-        <div class="term-grid">
-            <div class="term-item"><strong>Неравенство</strong> — выражение вида a > b, a < b, a ≥ b, a ≤ b.</div>
-            <div class="term-item"><strong>Решение неравенства</strong> — значение переменной, при котором неравенство верно.</div>
-            <div class="term-item"><strong>Система неравенств</strong> — несколько неравенств, которые должны выполняться одновременно.</div>
-            <div class="term-item"><strong>Числовой промежуток</strong> — множество чисел, удовлетворяющих неравенству.</div>
-            <div class="term-item"><strong>Интервал (a; b)</strong> — a < x < b (круглые скобки — концы НЕ включены).</div>
-            <div class="term-item"><strong>Отрезок [a; b]</strong> — a ≤ x ≤ b (квадратные скобки — концы включены).</div>
-            <div class="term-item"><strong>Луч [a; +∞)</strong> — x ≥ a; <strong>(−∞; a)</strong> — x < a.</div>
-            <div class="term-item"><strong>Пересечение решений</strong> — общая часть всех решений системы.</div>
+<div class="quiz-wrapper" id="quizWrapper">
+    <div class="quiz-card" id="quizCard">
+        <div class="quiz-header">
+            <div class="title">
+                <h1>📐 Неравенства и системы</h1>
+                <p>Термины · Обозначения · Числовые промежутки · 8 класс</p>
+            </div>
+            <div class="score-box" id="scoreBox">
+                <span>🏆 Баллы:</span> <span id="scoreDisplay">0</span> / <span id="totalSpan">16</span>
+            </div>
         </div>
-        <h3>📌 Примеры записи ответов:</h3>
-        <div class="example">x > 5  →  (5; +∞)</div>
-        <div class="example">x ≤ -2 →  (-∞; -2]</div>
-        <div class="example">-3 < x ≤ 4 →  (-3; 4]</div>
-        <div class="example">нет решений → ∅</div>
-
-        <h3>🧩 Алгоритм решения системы неравенств:</h3>
-        <div class="example">
-            1. Решить каждое неравенство отдельно.<br>
-            2. Отметить решения на координатной прямой.<br>
-            3. Найти пересечение (общую часть).<br>
-            4. Записать ответ в виде промежутка или луча.
+        <div class="quiz-body" id="quizBody">
+            <!-- динамическое содержимое -->
         </div>
-    </div>
-
-    <!-- ========== ЧАСТЬ 2: ВИКТОРИНА (сначала термины, потом простые системы) ========== -->
-    <div class="glass-card">
-        <h2>🎯 Викторина</h2>
-        <p style="margin-bottom: 1rem;">Две части: <span class="badge">Термины</span> <span class="badge">Решение систем</span> . Нажимай на варианты ответов, а если нужно — «Открыть подсказку».</p>
-
-        <!-- === БЛОК А: ТЕРМИНЫ (4 вопроса) === -->
-        <h3>📌 Часть 1. Термины и обозначения</h3>
-        <div id="quiz-terms" class="quiz-section"></div>
-
-        <!-- === БЛОК Б: ПРОСТЫЕ СИСТЕМЫ (5 вопросов) === -->
-        <h3>📌 Часть 2. Решение систем неравенств</h3>
-        <div id="quiz-systems" class="quiz-section"></div>
     </div>
 </div>
 
 <script>
-    // Вопросы на термины и обозначения
-    const termsQuestions = [
-        {
-            text: "Как называется множество чисел, удовлетворяющих неравенству a < x < b?",
-            options: ["Отрезок", "Интервал", "Луч", "Полуинтервал"],
-            correct: 1,
-            hint: "Круглые скобки — это ..."
-        },
-        {
-            text: "Какой знак соответствует строгому неравенству «больше»?",
-            options: [">", "≥", "<", "≤"],
-            correct: 0,
-            hint: "Строгое — без черты снизу."
-        },
-        {
-            text: "Что означает запись x ∈ [−3; 5]?",
-            options: ["−3 < x < 5", "−3 ≤ x ≤ 5", "−3 ≤ x < 5", "x < −3 или x > 5"],
-            correct: 1,
-            hint: "Квадратные скобки означают, что концы включены."
-        },
-        {
-            text: "Если система неравенств не имеет общих решений, то ответ записывают как:",
-            options: ["0", "∅", "нет корней", "∞"],
-            correct: 1,
-            hint: "Специальный символ пустого множества."
-        }
+    // ======================= 16 ВОПРОСОВ ПО ТЕРМИНАМ И ОБОЗНАЧЕНИЯМ =======================
+    const QUESTIONS = [
+        { text: "Как называется множество чисел, удовлетворяющих неравенству a < x < b?", options: ["Отрезок", "Интервал", "Луч", "Полуинтервал"], correct: 1, explanation: "Интервал — это промежуток, у которого оба конца не включены (круглые скобки)." },
+        { text: "Какой знак соответствует строгому неравенству «больше»?", options: [">", "≥", "<", "≤"], correct: 0, explanation: "Строгое неравенство — без черты снизу (не равно)." },
+        { text: "Что означает запись x ∈ [−3; 5]?", options: ["−3 < x < 5", "−3 ≤ x ≤ 5", "−3 ≤ x < 5", "x < −3 или x > 5"], correct: 1, explanation: "Квадратные скобки означают, что концы промежутка включены." },
+        { text: "Если система неравенств не имеет общих решений, то ответ записывают как:", options: ["0", "∅", "нет корней", "∞"], correct: 1, explanation: "Символ ∅ означает пустое множество — решений нет." },
+        { text: "Какой промежуток соответствует неравенству x > 5?", options: ["[5; +∞)", "(5; +∞)", "(-∞; 5)", "(-∞; 5]"], correct: 1, explanation: "x > 5 — открытый луч, начинается с 5 (не включая) и до +∞." },
+        { text: "Какой промежуток соответствует неравенству x ≤ −2?", options: ["(−∞; −2)", "(−∞; −2]", "[−2; +∞)", "(−2; +∞)"], correct: 1, explanation: "x ≤ −2 — луч со знаком ≤, значит −2 включено, идёт в минус бесконечность." },
+        { text: "Что означает запись (−3; 4]?", options: ["−3 < x < 4", "−3 ≤ x ≤ 4", "−3 < x ≤ 4", "−3 ≤ x < 4"], correct: 2, explanation: "Круглая скобка — конец не включён, квадратная — включён." },
+        { text: "Какое неравенство задаёт множество чисел, изображённое на координатной прямой от 2 до 7 (точки 2 и 7 включены)?", options: ["2 < x < 7", "2 ≤ x ≤ 7", "2 < x ≤ 7", "2 ≤ x < 7"], correct: 1, explanation: "Оба конца включены — отрезок, квадратные скобки." },
+        { text: "Что значит «решить систему неравенств»?", options: ["Найти одно любое решение", "Найти все общие решения всех неравенств системы", "Найти решение каждого неравенства отдельно", "Построить график"], correct: 1, explanation: "Нужно найти пересечение множеств решений каждого неравенства." },
+        { text: "Какой символ используется для обозначения бесконечности в числовых промежутках?", options: ["∞", "0", "∅", "≈"], correct: 0, explanation: "∞ — бесконечность, используется в лучах и интервалах." },
+        { text: "Как называется промежуток вида [a; b]?", options: ["Интервал", "Луч", "Отрезок", "Полуинтервал"], correct: 2, explanation: "Отрезок — оба конца включены." },
+        { text: "Как называется промежуток вида [a; b)?", options: ["Интервал", "Луч", "Отрезок", "Полуинтервал"], correct: 3, explanation: "Полуинтервал — один конец включён, другой нет." },
+        { text: "Что означает запись x ∈ (−∞; 0) ∪ (0; +∞)?", options: ["Все числа, кроме нуля", "Все отрицательные числа", "Все положительные числа", "Только ноль"], correct: 0, explanation: "Объединение двух лучей — все числа, кроме нуля." },
+        { text: "Какое из этих чисел НЕ является решением неравенства x > 3?", options: ["4", "5", "3", "10"], correct: 2, explanation: "3 не больше 3, это строгое неравенство." },
+        { text: "Сколько решений может иметь система неравенств?", options: ["Ни одного", "Одно", "Бесконечно много", "Все перечисленные"], correct: 3, explanation: "Система может иметь 0, 1 или бесконечно много решений — зависит от неравенств." },
+        { text: "Какой знак нужно поставить, чтобы получить нестрогое неравенство «меньше или равно»?", options: ["<", ">", "≤", "≥"], correct: 2, explanation: "≤ — меньше или равно." }
     ];
 
-    // Вопросы на решение простых систем (как в 8 классе)
-    const systemsQuestions = [
-        {
-            text: "Решите систему: { 2x > 6,  x - 4 < 0 }",
-            options: ["(3; 4)", "(3; +∞)", "(-∞; 4)", "∅"],
-            correct: 0,
-            hint: "Первое: x > 3, второе: x < 4 → пересечение."
-        },
-        {
-            text: "Решите систему: { 3x - 1 ≤ 8,  5 - x > 2 }",
-            options: ["x < 3", "x ≤ 3", "x < 3 и x ≤ 3 → x < 3", "нет решений"],
-            correct: 2,
-            hint: "Первое: 3x ≤ 9 → x ≤ 3. Второе: -x > -3 → x < 3. Общее: x < 3."
-        },
-        {
-            text: "Решите систему: { 4x + 5 ≥ 1,  2x - 7 < 3 }",
-            options: ["[-1; 5)", "(-1; 5]", "(-∞; 5)", "[ -1; +∞)"],
-            correct: 0,
-            hint: "Первое: 4x ≥ -4 → x ≥ -1. Второе: 2x < 10 → x < 5. Пересечение: [-1; 5)."
-        },
-        {
-            text: "Решите систему: { x + 3 > 5,  x - 2 > 4 }",
-            options: ["x > 2", "x > 6", "(2; 6)", "∅"],
-            correct: 1,
-            hint: "Первое: x > 2, второе: x > 6 → общее x > 6."
-        },
-        {
-            text: "Решите систему: { 2 - x > 0,  0,5x - 2 < 0 } (как в примере из учебника)",
-            options: ["x < 2", "x < 4", "x > 2", "(-∞; 2)"],
-            correct: 3,
-            hint: "Первое: -x > -2 → x < 2. Второе: 0,5x < 2 → x < 4. Пересечение: x < 2 → (-∞; 2)."
+    const TOTAL = QUESTIONS.length;
+    let mode = null;
+    let currentIndex = 0;
+    let userAnswers = new Array(TOTAL).fill(null);
+    let answerStatus = new Array(TOTAL).fill(false);
+    let answered = new Array(TOTAL).fill(false);
+    let quizCompleted = false;
+    let paperFinished = false;
+
+    const quizBodyDiv = document.getElementById("quizBody");
+    const scoreSpan = document.getElementById("scoreDisplay");
+    const totalSpan = document.getElementById("totalSpan");
+    totalSpan.innerText = TOTAL;
+
+    function updateScoreUI() {
+        if (mode !== 'screen') return;
+        let correctCount = answerStatus.filter(v => v === true).length;
+        scoreSpan.innerText = correctCount;
+    }
+
+    function evaluateQuestion(idx) {
+        const selected = userAnswers[idx];
+        if (selected === null) {
+            answerStatus[idx] = false;
+            return false;
         }
-    ];
+        const isCorrect = (selected === QUESTIONS[idx].correct);
+        answerStatus[idx] = isCorrect;
+        return isCorrect;
+    }
 
-    // Функция для отрисовки блока вопросов
-    function renderQuestions(containerId, questions, isSystem = false) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        container.innerHTML = "";
+    // ============================ РЕЖИМ "НА ЭКРАНЕ" ============================
+    function onSelectOption_Screen(optIndex) {
+        if (quizCompleted) return;
+        if (userAnswers[currentIndex] === optIndex) return;
+        userAnswers[currentIndex] = optIndex;
+        evaluateQuestion(currentIndex);
+        updateScoreUI();
+        renderScreenQuestion();
+    }
 
-        questions.forEach((q, idx) => {
-            const qDiv = document.createElement("div");
-            qDiv.className = "quiz-question";
-            qDiv.innerHTML = `
-                <p><strong>${idx+1}. ${q.text}</strong></p>
-                <div class="options" id="options-${containerId}-${idx}"></div>
-                <div class="feedback" id="feedback-${containerId}-${idx}"></div>
-                <button class="hint-btn" data-idx="${idx}" data-container="${containerId}">📖 Открыть подсказку</button>
-                <div class="hint-text" id="hint-${containerId}-${idx}">💡 ${q.hint}</div>
+    function renderScreenQuestion() {
+        const q = QUESTIONS[currentIndex];
+        const selectedIdx = userAnswers[currentIndex];
+        const isFinished = quizCompleted;
+
+        let optionsHtml = '';
+        const letters = ['А', 'Б', 'В', 'Г'];
+
+        q.options.forEach((opt, idx) => {
+            let additionalClasses = '';
+            if (isFinished) {
+                const isCorrectAnswer = (idx === q.correct);
+                if (isCorrectAnswer) additionalClasses = 'correct-highlight';
+                if (selectedIdx === idx && selectedIdx !== null && selectedIdx !== q.correct) {
+                    additionalClasses = 'wrong-highlight';
+                }
+                if (isCorrectAnswer && selectedIdx === null) additionalClasses = 'correct-highlight';
+                additionalClasses += ' disabled-option';
+            } else {
+                if (selectedIdx === idx) additionalClasses = 'selected-highlight';
+            }
+            optionsHtml += `
+                <div class="option ${additionalClasses} selectable" data-opt-index="${idx}">
+                    <div class="option-letter">${letters[idx]}</div>
+                    <div class="option-text">${escapeHtml(opt)}</div>
+                </div>
             `;
-            container.appendChild(qDiv);
+        });
 
-            // Отрисовка кнопок вариантов
-            const optionsDiv = qDiv.querySelector(`.options`);
-            q.options.forEach((opt, optIdx) => {
-                const btn = document.createElement("button");
-                btn.className = "option-btn";
-                btn.textContent = opt;
-                btn.dataset.optIndex = optIdx;
-                btn.addEventListener("click", () => {
-                    const feedbackDiv = qDiv.querySelector(`.feedback`);
-                    const isCorrect = (optIdx === q.correct);
-                    if (isCorrect) {
-                        feedbackDiv.innerHTML = `<span class="correct-feedback">✅ Верно! ${q.text} — правильный ответ.</span>`;
-                        // можно заблокировать повторные клики
-                        const allBtns = optionsDiv.querySelectorAll(".option-btn");
-                        allBtns.forEach(b => b.style.pointerEvents = "none");
-                    } else {
-                        feedbackDiv.innerHTML = `<span class="wrong-feedback">❌ Неверно. Попробуй ещё или открой подсказку.</span>`;
+        const answeredCount = answered.filter(a => a === true).length;
+        const progressPercent = Math.round((answeredCount / TOTAL) * 100);
+
+        if (isFinished) {
+            const correctTotal = answerStatus.filter(v => v === true).length;
+            const percentage = Math.round((correctTotal / TOTAL) * 100);
+            let gradeMsg = '';
+            if (percentage >= 85) gradeMsg = '🎉 Отлично! Вы отлично знаете термины и обозначения!';
+            else if (percentage >= 65) gradeMsg = '👍 Хорошо! Повторите числовые промежутки.';
+            else gradeMsg = '📚 Попробуйте ещё раз. Внимательно читайте пояснения.';
+
+            let allItemsHtml = '';
+            for (let i = 0; i < TOTAL; i++) {
+                const qu = QUESTIONS[i];
+                const userChoice = userAnswers[i];
+                const isUserCorrect = answerStatus[i];
+                const correctText = qu.options[qu.correct];
+                const userText = (userChoice !== null) ? qu.options[userChoice] : "Нет ответа";
+                allItemsHtml += `
+                    <div style="background:rgba(0,0,0,0.2); border-radius:1rem; padding:0.8rem; margin-bottom:0.8rem;">
+                        <strong>${i+1}. ${escapeHtml(qu.text)}</strong><br>
+                        <span style="color: ${isUserCorrect ? '#4ade80' : '#ff6b6b'};">${isUserCorrect ? '✅ Верно' : '❌ Ошибка'}</span><br>
+                        <span>📖 Правильный ответ: ${escapeHtml(correctText)}</span><br>
+                        ${!isUserCorrect ? `<span>✏️ Ваш ответ: ${escapeHtml(userText)}</span><br>` : ''}
+                        <div style="font-size:13px; opacity:0.7; margin-top:5px;">💡 ${qu.explanation}</div>
+                    </div>
+                `;
+            }
+
+            const finalHtml = `
+                <div style="font-size:1.4rem; font-weight:700; margin-bottom:1rem;">📊 РЕЗУЛЬТАТ ВИКТОРИНЫ</div>
+                <div style="background:rgba(0,0,0,0.3); border-radius:1.2rem; padding:1rem; text-align:center; margin-bottom:1rem;">
+                    <span style="font-size:1.5rem; font-weight:700;">${correctTotal} / ${TOTAL} (${percentage}%)</span>
+                    <p style="margin-top:0.5rem;">${gradeMsg}</p>
+                </div>
+                <div class="final-list">${allItemsHtml}</div>
+                <div class="nav-buttons" style="justify-content:center; margin-top:1rem;">
+                    <button id="restartScreenBtn" class="btn-restart">🔄 Пройти заново</button>
+                </div>
+            `;
+            quizBodyDiv.innerHTML = finalHtml;
+            document.getElementById("restartScreenBtn")?.addEventListener("click", () => startScreenMode());
+            return;
+        }
+
+        const normalHtml = `
+            <div class="question-text">
+                ${currentIndex + 1}. ${escapeHtml(q.text)}
+            </div>
+            <div class="options-list">
+                ${optionsHtml}
+            </div>
+            <div class="nav-buttons">
+                <button id="prevBtn" ${currentIndex === 0 ? 'disabled' : ''}>◀ Назад</button>
+                <button id="nextBtn" class="btn-next">${currentIndex === TOTAL - 1 ? '🏁 Завершить' : 'Следующий →'}</button>
+            </div>
+            <div class="progress-info">
+                📍 Вопрос ${currentIndex+1} из ${TOTAL} | Отвечено: ${answeredCount}/${TOTAL} (${progressPercent}%)
+            </div>
+        `;
+        quizBodyDiv.innerHTML = normalHtml;
+
+        if (!quizCompleted) {
+            document.querySelectorAll('.option.selectable').forEach(optDiv => {
+                const optIndex = parseInt(optDiv.dataset.optIndex);
+                optDiv.addEventListener('click', () => {
+                    if (!answered[currentIndex] && !quizCompleted) {
+                        answered[currentIndex] = true;
+                        onSelectOption_Screen(optIndex);
                     }
                 });
-                optionsDiv.appendChild(btn);
             });
+        }
 
-            // Подсказка
-            const hintBtn = qDiv.querySelector(".hint-btn");
-            const hintDiv = qDiv.querySelector(".hint-text");
-            hintBtn.addEventListener("click", () => {
-                hintDiv.classList.toggle("show");
-                hintBtn.textContent = hintDiv.classList.contains("show") ? "🔒 Закрыть подсказку" : "📖 Открыть подсказку";
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (!quizCompleted && currentIndex > 0) {
+                    currentIndex--;
+                    renderScreenQuestion();
+                }
             });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (quizCompleted) return;
+                if (currentIndex === TOTAL - 1) {
+                    finishScreenQuiz();
+                } else {
+                    if (!answered[currentIndex]) return;
+                    currentIndex++;
+                    renderScreenQuestion();
+                }
+            });
+        }
+    }
+
+    function finishScreenQuiz() {
+        if (quizCompleted) return;
+        for (let i = 0; i < TOTAL; i++) {
+            if (userAnswers[i] !== null) evaluateQuestion(i);
+            else answerStatus[i] = false;
+        }
+        quizCompleted = true;
+        renderScreenQuestion();
+    }
+
+    function startScreenMode() {
+        mode = 'screen';
+        quizCompleted = false;
+        currentIndex = 0;
+        userAnswers = new Array(TOTAL).fill(null);
+        answerStatus = new Array(TOTAL).fill(false);
+        answered = new Array(TOTAL).fill(false);
+        updateScoreUI();
+        renderScreenQuestion();
+    }
+
+    // ============================ РЕЖИМ "НА ЛИСТОЧКЕ" ============================
+    let paperCurrentIndex = 0;
+
+    function renderPaperQuestion() {
+        if (paperFinished) {
+            let listHtml = `<div class="question-text">📝 Вопросы для самопроверки (на листочке)</div>`;
+            listHtml += `<div class="final-list">`;
+            QUESTIONS.forEach((q, idx) => {
+                const letters = ['А', 'Б', 'В', 'Г'];
+                const optionsStr = q.options.map((opt, i) => `${letters[i]}) ${escapeHtml(opt)}`).join(' · ');
+                listHtml += `
+                    <div class="final-item">
+                        <strong>${idx+1}. ${escapeHtml(q.text)}</strong><br>
+                        <span style="opacity:0.6; font-size:0.85rem;">${optionsStr}</span>
+                    </div>
+                `;
+            });
+            listHtml += `</div><div class="nav-buttons" style="justify-content:center;"><button id="restartPaperBtn" class="btn-restart">🔄 Выбрать режим заново</button></div>`;
+            quizBodyDiv.innerHTML = listHtml;
+            document.getElementById("restartPaperBtn")?.addEventListener("click", () => showModeSelection());
+            return;
+        }
+
+        const q = QUESTIONS[paperCurrentIndex];
+        const letters = ['А', 'Б', 'В', 'Г'];
+        let optionsHtml = '';
+        q.options.forEach((opt, idx) => {
+            optionsHtml += `
+                <div class="option" style="cursor: default;">
+                    <div class="option-letter">${letters[idx]}</div>
+                    <div class="option-text">${escapeHtml(opt)}</div>
+                </div>
+            `;
+        });
+
+        const isLast = (paperCurrentIndex === TOTAL - 1);
+        const html = `
+            <div class="question-text">
+                ${paperCurrentIndex + 1}. ${escapeHtml(q.text)}
+            </div>
+            <div class="options-list">
+                ${optionsHtml}
+            </div>
+            <div class="nav-buttons">
+                <button id="paperPrevBtn" ${paperCurrentIndex === 0 ? 'disabled' : ''}>◀ Назад</button>
+                <button id="paperNextBtn" class="btn-next">${isLast ? '🏁 Завершить' : 'Следующий →'}</button>
+            </div>
+            <div class="progress-info">
+                📍 Вопрос ${paperCurrentIndex+1} из ${TOTAL} · Запишите ответ на листочек
+            </div>
+        `;
+        quizBodyDiv.innerHTML = html;
+
+        const prevBtn = document.getElementById('paperPrevBtn');
+        const nextBtn = document.getElementById('paperNextBtn');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (paperCurrentIndex > 0) {
+                    paperCurrentIndex--;
+                    renderPaperQuestion();
+                }
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (isLast) {
+                    paperFinished = true;
+                    renderPaperQuestion();
+                } else {
+                    paperCurrentIndex++;
+                    renderPaperQuestion();
+                }
+            });
+        }
+    }
+
+    function startPaperMode() {
+        mode = 'paper';
+        paperCurrentIndex = 0;
+        paperFinished = false;
+        renderPaperQuestion();
+    }
+
+    // ============================ ЭКРАН ВЫБОРА РЕЖИМА ============================
+    function showModeSelection() {
+        mode = null;
+        const modeHtml = `
+            <div class="mode-screen">
+                <div>
+                    <div class="mode-title">📖 Как вы будете отвечать?</div>
+                    <div class="mode-desc">Тема: Неравенства, системы, числовые промежутки · 16 вопросов · 8 класс</div>
+                </div>
+                <div class="mode-buttons">
+                    <button class="mode-btn" id="screenModeBtn">🖥️ На экране<br><small>выбор ответа, подсветка, баллы</small></button>
+                    <button class="mode-btn paper" id="paperModeBtn">📄 На листочке<br><small>просто вопросы, ответы записываете отдельно</small></button>
+                </div>
+                <div class="mode-desc" style="margin-top: 1rem;">✔️ В режиме «На листочке» вы не выбираете ответ на экране — только читаете вопрос и варианты, а ответ пишете на бумаге. В конце покажется список всех вопросов.</div>
+            </div>
+        `;
+        quizBodyDiv.innerHTML = modeHtml;
+        document.getElementById("screenModeBtn")?.addEventListener("click", startScreenMode);
+        document.getElementById("paperModeBtn")?.addEventListener("click", startPaperMode);
+        scoreSpan.innerText = "0";
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
         });
     }
 
-    renderQuestions("quiz-terms", termsQuestions, false);
-    renderQuestions("quiz-systems", systemsQuestions, true);
+    showModeSelection();
 </script>
 </body>
 </html>
