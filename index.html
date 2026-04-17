@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Неравенства и системы | 8 класс | Теория + викторина</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background: linear-gradient(145deg, #1a2a3a 0%, #0e1a2a 100%);
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* карточки */
+        .glass-card {
+            background: rgba(20, 25, 35, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #b0c4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 1rem 0 1rem 0;
+            border-left: 4px solid #ffaa44;
+            padding-left: 1rem;
+            color: #ffdd99;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 1rem 0 0.5rem 0;
+            color: #ffdd99;
+        }
+
+        .term-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .term-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 1.2rem;
+            padding: 0.8rem 1rem;
+            border-left: 3px solid #ffaa44;
+        }
+
+        .term-item strong {
+            color: #ffaa88;
+        }
+
+        .example {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 1.2rem;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            font-family: monospace;
+            font-size: 1rem;
+        }
+
+        .quiz-section {
+            margin-top: 1rem;
+        }
+
+        .quiz-question {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .quiz-question p {
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 0.8rem 0;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+            padding: 0.4rem 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(0.97);
+        }
+
+        .feedback {
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            border-radius: 1rem;
+        }
+
+        .correct-feedback {
+            color: #a3e0a3;
+            background: rgba(74, 222, 128, 0.1);
+            border-left: 3px solid #4ade80;
+        }
+
+        .wrong-feedback {
+            color: #ffaaaa;
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+        }
+
+        .hint-btn {
+            background: rgba(255, 170, 68, 0.15);
+            border: 1px solid #ffaa44;
+            border-radius: 2rem;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: 0.2s;
+        }
+
+        .hint-btn:hover {
+            background: rgba(255, 170, 68, 0.3);
+        }
+
+        .hint-text {
+            margin-top: 0.5rem;
+            padding: 0.6rem;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            font-family: monospace;
+            display: none;
+        }
+
+        .hint-text.show {
+            display: block;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffaa44;
+            color: #1a2a3a;
+            font-weight: bold;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            margin-right: 0.6rem;
+        }
+
+        @media (max-width: 650px) {
+            .glass-card {
+                padding: 1.2rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- ЗАГОЛОВОК -->
+    <div class="glass-card">
+        <h1>📐 Неравенства с одной переменной</h1>
+        <p>8 класс · Системы неравенств · Обозначения · Решение</p>
+    </div>
+
+    <!-- ========== ЧАСТЬ 1: ТЕОРИЯ (ТЕРМИНЫ, ОБОЗНАЧЕНИЯ) ========== -->
+    <div class="glass-card">
+        <h2>📖 Термины и обозначения</h2>
+        <div class="term-grid">
+            <div class="term-item"><strong>Неравенство</strong> — выражение вида a > b, a < b, a ≥ b, a ≤ b.</div>
+            <div class="term-item"><strong>Решение неравенства</strong> — значение переменной, при котором неравенство верно.</div>
+            <div class="term-item"><strong>Система неравенств</strong> — несколько неравенств, которые должны выполняться одновременно.</div>
+            <div class="term-item"><strong>Числовой промежуток</strong> — множество чисел, удовлетворяющих неравенству.</div>
+            <div class="term-item"><strong>Интервал (a; b)</strong> — a < x < b (круглые скобки — концы НЕ включены).</div>
+            <div class="term-item"><strong>Отрезок [a; b]</strong> — a ≤ x ≤ b (квадратные скобки — концы включены).</div>
+            <div class="term-item"><strong>Луч [a; +∞)</strong> — x ≥ a; <strong>(−∞; a)</strong> — x < a.</div>
+            <div class="term-item"><strong>Пересечение решений</strong> — общая часть всех решений системы.</div>
+        </div>
+        <h3>📌 Примеры записи ответов:</h3>
+        <div class="example">x > 5  →  (5; +∞)</div>
+        <div class="example">x ≤ -2 →  (-∞; -2]</div>
+        <div class="example">-3 < x ≤ 4 →  (-3; 4]</div>
+        <div class="example">нет решений → ∅</div>
+
+        <h3>🧩 Алгоритм решения системы неравенств:</h3>
+        <div class="example">
+            1. Решить каждое неравенство отдельно.<br>
+            2. Отметить решения на координатной прямой.<br>
+            3. Найти пересечение (общую часть).<br>
+            4. Записать ответ в виде промежутка или луча.
+        </div>
+    </div>
+
+    <!-- ========== ЧАСТЬ 2: ВИКТОРИНА (сначала термины, потом простые системы) ========== -->
+    <div class="glass-card">
+        <h2>🎯 Викторина</h2>
+        <p style="margin-bottom: 1rem;">Две части: <span class="badge">Термины</span> <span class="badge">Решение систем</span> . Нажимай на варианты ответов, а если нужно — «Открыть подсказку».</p>
+
+        <!-- === БЛОК А: ТЕРМИНЫ (4 вопроса) === -->
+        <h3>📌 Часть 1. Термины и обозначения</h3>
+        <div id="quiz-terms" class="quiz-section"></div>
+
+        <!-- === БЛОК Б: ПРОСТЫЕ СИСТЕМЫ (5 вопросов) === -->
+        <h3>📌 Часть 2. Решение систем неравенств</h3>
+        <div id="quiz-systems" class="quiz-section"></div>
+    </div>
+</div>
+
+<script>
+    // Вопросы на термины и обозначения
+    const termsQuestions = [
+        {
+            text: "Как называется множество чисел, удовлетворяющих неравенству a < x < b?",
+            options: ["Отрезок", "Интервал", "Луч", "Полуинтервал"],
+            correct: 1,
+            hint: "Круглые скобки — это ..."
+        },
+        {
+            text: "Какой знак соответствует строгому неравенству «больше»?",
+            options: [">", "≥", "<", "≤"],
+            correct: 0,
+            hint: "Строгое — без черты снизу."
+        },
+        {
+            text: "Что означает запись x ∈ [−3; 5]?",
+            options: ["−3 < x < 5", "−3 ≤ x ≤ 5", "−3 ≤ x < 5", "x < −3 или x > 5"],
+            correct: 1,
+            hint: "Квадратные скобки означают, что концы включены."
+        },
+        {
+            text: "Если система неравенств не имеет общих решений, то ответ записывают как:",
+            options: ["0", "∅", "нет корней", "∞"],
+            correct: 1,
+            hint: "Специальный символ пустого множества."
+        }
+    ];
+
+    // Вопросы на решение простых систем (как в 8 классе)
+    const systemsQuestions = [
+        {
+            text: "Решите систему: { 2x > 6,  x - 4 < 0 }",
+            options: ["(3; 4)", "(3; +∞)", "(-∞; 4)", "∅"],
+            correct: 0,
+            hint: "Первое: x > 3, второе: x < 4 → пересечение."
+        },
+        {
+            text: "Решите систему: { 3x - 1 ≤ 8,  5 - x > 2 }",
+            options: ["x < 3", "x ≤ 3", "x < 3 и x ≤ 3 → x < 3", "нет решений"],
+            correct: 2,
+            hint: "Первое: 3x ≤ 9 → x ≤ 3. Второе: -x > -3 → x < 3. Общее: x < 3."
+        },
+        {
+            text: "Решите систему: { 4x + 5 ≥ 1,  2x - 7 < 3 }",
+            options: ["[-1; 5)", "(-1; 5]", "(-∞; 5)", "[ -1; +∞)"],
+            correct: 0,
+            hint: "Первое: 4x ≥ -4 → x ≥ -1. Второе: 2x < 10 → x < 5. Пересечение: [-1; 5)."
+        },
+        {
+            text: "Решите систему: { x + 3 > 5,  x - 2 > 4 }",
+            options: ["x > 2", "x > 6", "(2; 6)", "∅"],
+            correct: 1,
+            hint: "Первое: x > 2, второе: x > 6 → общее x > 6."
+        },
+        {
+            text: "Решите систему: { 2 - x > 0,  0,5x - 2 < 0 } (как в примере из учебника)",
+            options: ["x < 2", "x < 4", "x > 2", "(-∞; 2)"],
+            correct: 3,
+            hint: "Первое: -x > -2 → x < 2. Второе: 0,5x < 2 → x < 4. Пересечение: x < 2 → (-∞; 2)."
+        }
+    ];
+
+    // Функция для отрисовки блока вопросов
+    function renderQuestions(containerId, questions, isSystem = false) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+
+        questions.forEach((q, idx) => {
+            const qDiv = document.createElement("div");
+            qDiv.className = "quiz-question";
+            qDiv.innerHTML = `
+                <p><strong>${idx+1}. ${q.text}</strong></p>
+                <div class="options" id="options-${containerId}-${idx}"></div>
+                <div class="feedback" id="feedback-${containerId}-${idx}"></div>
+                <button class="hint-btn" data-idx="${idx}" data-container="${containerId}">📖 Открыть подсказку</button>
+                <div class="hint-text" id="hint-${containerId}-${idx}">💡 ${q.hint}</div>
+            `;
+            container.appendChild(qDiv);
+
+            // Отрисовка кнопок вариантов
+            const optionsDiv = qDiv.querySelector(`.options`);
+            q.options.forEach((opt, optIdx) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.textContent = opt;
+                btn.dataset.optIndex = optIdx;
+                btn.addEventListener("click", () => {
+                    const feedbackDiv = qDiv.querySelector(`.feedback`);
+                    const isCorrect = (optIdx === q.correct);
+                    if (isCorrect) {
+                        feedbackDiv.innerHTML = `<span class="correct-feedback">✅ Верно! ${q.text} — правильный ответ.</span>`;
+                        // можно заблокировать повторные клики
+                        const allBtns = optionsDiv.querySelectorAll(".option-btn");
+                        allBtns.forEach(b => b.style.pointerEvents = "none");
+                    } else {
+                        feedbackDiv.innerHTML = `<span class="wrong-feedback">❌ Неверно. Попробуй ещё или открой подсказку.</span>`;
+                    }
+                });
+                optionsDiv.appendChild(btn);
+            });
+
+            // Подсказка
+            const hintBtn = qDiv.querySelector(".hint-btn");
+            const hintDiv = qDiv.querySelector(".hint-text");
+            hintBtn.addEventListener("click", () => {
+                hintDiv.classList.toggle("show");
+                hintBtn.textContent = hintDiv.classList.contains("show") ? "🔒 Закрыть подсказку" : "📖 Открыть подсказку";
+            });
+        });
+    }
+
+    renderQuestions("quiz-terms", termsQuestions, false);
+    renderQuestions("quiz-systems", systemsQuestions, true);
+</script>
+</body>
+</html>
